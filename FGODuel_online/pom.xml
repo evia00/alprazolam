@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>FGODuel_online</groupId>
+  <artifactId>FGODuel_online</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>9</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>main.java.org.fgoduel.FGODuelMain</mainClass>
+              <packageName>main.java.org.fgoduel</packageName>
+              <addClasspath>true</addClasspath>
+              <addExtensions>true</addExtensions>
+              <classpathPrefix>lib</classpathPrefix>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.5</version>
+        <configuration>
+          <target>
+            <echo message="copy files"/>
+            <property name="fileDir" value="src/servFile"/>
+            <copy file="${fileDir}" tofile="${fileDir}"/>
+          </target>
+        </configuration>
+      </plugin>
+    </plugins>
+    
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.projectlombok</groupId>
+  		<artifactId>lombok</artifactId>
+  		<scope>provided</scope>
+  		<version>1.18.0</version>
+  	</dependency>
+  </dependencies>
+</project>

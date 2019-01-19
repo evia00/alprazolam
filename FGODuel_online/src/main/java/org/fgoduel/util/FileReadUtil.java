@@ -1,11 +1,16 @@
 package main.java.org.fgoduel.util;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import main.java.org.fgoduel.constants.ServantClass;
 import main.java.org.fgoduel.model.Servant;
@@ -13,7 +18,11 @@ import main.java.org.fgoduel.playerdata.CharcterData;
 
 public class FileReadUtil {
 
-    static String path = "./servFile";
+    /** ファイルパス */
+    static final String PATH = "servant/";
+
+    /** リストファイル */
+    static final String LIST_FILE = "list.txt";
 
     /**
      * ファイル読み込み
@@ -21,18 +30,18 @@ public class FileReadUtil {
      * @param charData
      * @throws IOException
      */
-    public static void readServant(CharcterData charData) throws IOException {
+    public void readServant(CharcterData charData) throws IOException {
 
-        File dir = new File(path);
+        // fileアクセサ
+        FileAccessUtil fileUtil = new FileAccessUtil();
+        // 対象ファイルリスト
+        List<String> filelist = fileUtil.getReadAllLines(LIST_FILE);
 
-        String[] filelist = dir.list();
-
-        for (String fileName : filelist) {
-            Path filePath = Paths.get(path + "/" + fileName);
-            List<String> data = Files.readAllLines(filePath);
-            charData.getServants().put(fileName, createServant(data));
+        for (String file : filelist) {
+            List<String> data = fileUtil.getReadAllLines(PATH + file);
+            System.out.println(PATH + file);
+            charData.getServants().put(file, createServant(data));
         }
-
     }
 
     /**

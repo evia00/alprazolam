@@ -12,7 +12,8 @@ public class FGODuelMain {
 
         CharcterData charcters = new CharcterData();
         try {
-            FileReadUtil.readServant(charcters);
+            FileReadUtil fileUtil = new FileReadUtil();
+            fileUtil.readServant(charcters);
         } catch (IOException e) {
             e.printStackTrace();
         }
